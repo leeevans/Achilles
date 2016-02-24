@@ -5,6 +5,9 @@ library(testthat)
 
 
 test_that("Achilles main does not throw an error on Postgres", {
+
+  errorReport <- paste(getwd(), "/errorReport.txt", sep = "")
+
   # Postgresql
   details <- createConnectionDetails(dbms = "postgresql",
                                      user = Sys.getenv("CDM5_POSTGRESQL_USER"),
@@ -17,8 +20,8 @@ test_that("Achilles main does not throw an error on Postgres", {
                          cdmVersion = "5", 
                          validateSchema = FALSE, 
                          createTable = TRUE))
-  if (file.exists("errorReport.txt")){
-    writeLines(readChar("errorReport.txt", file.info("errorReport.txt")$size))
+  if (file.exists(errorReport)){
+    writeLines(readChar(errorReport, file.info(errorReport)$size))
   }
   expect_true(class(result) == "achillesResults")
 })
@@ -36,8 +39,8 @@ test_that("Achilles main does not throw an error on SQL Server", {
                          cdmVersion = "5", 
                          validateSchema = FALSE, 
                          createTable = TRUE))
-  if (file.exists("errorReport.txt")){
-    writeLines(readChar("errorReport.txt", file.info("errorReport.txt")$size))
+  if (file.exists(errorReport)){
+    writeLines(readChar(errorReport, file.info(errorReport)$size))
   }
   expect_true(class(result) == "achillesResults")
 })
@@ -56,8 +59,8 @@ test_that("Achilles main does not throw an error on Oracle", {
                          cdmVersion = "5", 
                          validateSchema = FALSE, 
                          createTable = TRUE))
-  if (file.exists("errorReport.txt")){
-    writeLines(readChar("errorReport.txt", file.info("errorReport.txt")$size))
+  if (file.exists(errorReport)){
+    writeLines(readChar(errorReport, file.info(errorReport)$size))
   }
   expect_true(class(result) == "achillesResults")
 })
@@ -73,8 +76,8 @@ test_that("Achilles export does not throw an error on Postgres", {
                    resultsDatabaseSchema = Sys.getenv("CDM5_POSTGRESQL_OHDSI_SCHEMA"),
                    outputPath = "postgresql",
                    cdmVersion = "5"))
-  if (file.exists("errorReport.txt")){
-    writeLines(readChar("errorReport.txt", file.info("errorReport.txt")$size))
+  if (file.exists(errorReport)){
+    writeLines(readChar(errorReport, file.info(errorReport)$size))
   }
   # dashboard.json is the last report to be generated:
   expect_true(file.exists("postgresql/dashboard.json"))
@@ -91,8 +94,8 @@ test_that("Achilles export does not throw an error on SQL Server", {
                    resultsDatabaseSchema = Sys.getenv("CDM5_SQL_SERVER_OHDSI_SCHEMA"),
                    outputPath = "sql_server",
                    cdmVersion = "5"))
-  if (file.exists("errorReport.txt")){
-    writeLines(readChar("errorReport.txt", file.info("errorReport.txt")$size))
+  if (file.exists(errorReport)){
+    writeLines(readChar(errorReport, file.info(errorReport)$size))
   }
   # dashboard.json is the last report to be generated:
   expect_true(file.exists("sql_server/dashboard.json"))
@@ -109,8 +112,8 @@ test_that("Achilles export does not throw an error on Oracle", {
                    resultsDatabaseSchema = Sys.getenv("CDM5_ORACLE_OHDSI_SCHEMA"),
                    outputPath = "oracle",
                    cdmVersion = "5"))
-  if (file.exists("errorReport.txt")){
-    writeLines(readChar("errorReport.txt", file.info("errorReport.txt")$size))
+  if (file.exists(errorReport)){
+    writeLines(readChar(errorReport, file.info(errorReport)$size))
   }
   # dashboard.json is the last report to be generated:
   expect_true(file.exists("oracle/dashboard.json"))
