@@ -21,7 +21,7 @@ test_that("Achilles main does not throw an error on Postgres", {
                          validateSchema = FALSE, 
                          createTable = TRUE))
   if (file.exists(errorReport)){
-    writeLines(readChar(errorReport, file.info(errorReport)$size))
+    writeLines(readLines(errorReport, warn=FALSE))
   }
   expect_true(class(result) == "achillesResults")
 })
@@ -40,7 +40,7 @@ test_that("Achilles main does not throw an error on SQL Server", {
                          validateSchema = FALSE, 
                          createTable = TRUE))
   if (file.exists(errorReport)){
-    writeLines(readChar(errorReport, file.info(errorReport)$size))
+    writeLines(readLines(errorReport, warn=FALSE))
   }
   expect_true(class(result) == "achillesResults")
 })
@@ -60,7 +60,7 @@ test_that("Achilles main does not throw an error on Oracle", {
                          validateSchema = FALSE, 
                          createTable = TRUE))
   if (file.exists(errorReport)){
-    writeLines(readChar(errorReport, file.info(errorReport)$size))
+    writeLines(readLines(errorReport, warn=FALSE))
   }
   expect_true(class(result) == "achillesResults")
 })
@@ -77,7 +77,7 @@ test_that("Achilles export does not throw an error on Postgres", {
                    outputPath = "postgresql",
                    cdmVersion = "5"))
   if (file.exists(errorReport)){
-    writeLines(readChar(errorReport, file.info(errorReport)$size))
+    writeLines(readLines(errorReport, warn=FALSE))
   }
   # dashboard.json is the last report to be generated:
   expect_true(file.exists("postgresql/dashboard.json"))
@@ -95,7 +95,7 @@ test_that("Achilles export does not throw an error on SQL Server", {
                    outputPath = "sql_server",
                    cdmVersion = "5"))
   if (file.exists(errorReport)){
-    writeLines(readChar(errorReport, file.info(errorReport)$size))
+    writeLines(readLines(errorReport, warn=FALSE))
   }
   # dashboard.json is the last report to be generated:
   expect_true(file.exists("sql_server/dashboard.json"))
@@ -113,7 +113,7 @@ test_that("Achilles export does not throw an error on Oracle", {
                    outputPath = "oracle",
                    cdmVersion = "5"))
   if (file.exists(errorReport)){
-    writeLines(readChar(errorReport, file.info(errorReport)$size))
+    writeLines(readLines(errorReport, warn=FALSE))
   }
   # dashboard.json is the last report to be generated:
   expect_true(file.exists("oracle/dashboard.json"))
